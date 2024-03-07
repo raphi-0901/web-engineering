@@ -1,0 +1,63 @@
+name: Tests
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9' 
+
+    - name: Cache Python dependencies
+      uses: actions/cache@v3
+      with:
+        path: ${{ env.pythonLocation }}
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install Python dependencies
+      run: pip install -r requirements.txt
+      working-directory: test
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.0.0'
+    
+    - name: Install Node dependencies
+      run: npm install --no-audit --no-fund
+      working-directory: test 
+
+    - name: Run tests
+      run: npm test
+      working-directory: test
+      continue-on-error: true
+    
+    - name: Update dashboard
+      continue-on-error: true
+      working-directory: test/report
+      run: |
+        jq -c --arg repo "$GITHUB_REPOSITORY" --arg commit "$GITHUB_SHA" \
+          '{repo: $repo, commit: $commit, report: .}' report.json > event.json
+        EVENT_SIG=`openssl dgst -sha256 -hmac ${{ secrets.DASH_TOKEN }} event.json | awk '{print $2}'`
+        curl -m 5 -X POST \
+          -H 'Content-Type: application/json' \
+          -H "X-Hub-Signature-256: sha256=$EVENT_SIG" \
+          --data-binary @event.json ${{ secrets.DASH_URL }} 
+    
+    - name: Upload report
+      uses: actions/upload-artifact@v3
+      with:
+        name: Report
+        path: test/report
+        retention-days: 7

@@ -1,0 +1,79 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    #cart img.sample-frame-1 {
+      box-sizing: border-box;
+      border-image-source: url(frame-styles/classic.jpg);
+      border-image-slice: 115;
+      border-width: 32px;
+      background-color: #D4E4BC;
+      padding: 0px;
+    }
+
+    #cart img.sample-frame-2 {
+      box-sizing: border-box;
+      border-image-source: url(frame-styles/natural.jpg);
+      border-image-slice: 75;
+      border-width: 16px;
+      background-color: #D4E4BC;
+      padding: 8px;
+    }
+  </style>
+  <title>Cart | Artmart</title>
+</head>
+
+<body>
+  <header>
+    <a href="search.html">
+      <img src="artmart_logo.png" alt="Artmart" class="logo">
+    </a>
+    <nav>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="cart">
+      <div class="cart-item">
+        <div class="cart-preview">
+          <a href="framing.html">
+            <img class="sample-frame-1" src="met-objects/DP815742.jpg" width="199" height="249"
+              alt="The Dream of the Shepherd (Der Traum des Hirten)">
+          </a>
+        </div>
+        <div class="museum-label">
+          Ferdinand Hodler
+          The Dream of the Shepherd (Der Traum des Hirten),
+          1896
+          <br><br>
+          Small print in a 5&nbsp;cm classic frame.
+          € 87.20
+          <button type="button" class="cart-remove" aria-label="Remove"></button>
+        </div>
+      </div>
+      <div class="cart-item">
+        <div class="cart-preview">
+          <a href="framing.html">
+            <img class="sample-frame-2" src="met-objects/DT1567.jpg" width="250" height="207"
+              alt="Wheat Field with Cypresses">
+          </a>
+        </div>
+        <div class="museum-label">
+          Vincent van Gogh
+          Wheat Field with Cypresses,
+          1889
+          <br><br>
+          Medium print in a 3.3&nbsp;cm natural frame with a 1.7&nbsp;cm mint mat.
+          € 114.50
+          <button type="button" class="cart-remove" aria-label="Remove"></button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

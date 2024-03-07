@@ -1,0 +1,634 @@
+/*****************************************************************************
+  Common Elements 
+ *****************************************************************************/
+
+:root {
+  --serif-font: Palatino, "Palatino Linotype", "URW Palladio L", serif;
+}
+
+body {
+  font-family: var(--serif-font);
+  font-size: 100%;
+  line-height: 1.2rem;
+  height: 100%;
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img {
+  display: block;
+}
+
+
+
+/* Buttons *******************************************************************/
+
+button {
+  cursor: pointer;
+}
+
+
+/*****************************************************************************
+  Header & Navigation
+ *****************************************************************************/
+
+header {
+  font-size: 2rem;
+  height: 3rem;
+  padding: 1em 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 1.5em;
+}
+
+.logo img {
+  height: 100%;
+}
+
+nav {
+  text-align: right;
+}
+
+nav a {
+  margin-left: 1em;
+}
+
+
+@media (max-width: 600px) {
+  header {
+    font-size: 1rem;
+    height: 2rem;    
+  }
+
+  nav a:hover {
+    border-bottom: 1px solid var(--primary-color);
+  }
+}
+
+
+/*****************************************************************************
+  Search
+ *****************************************************************************/
+
+.search-form {
+  width: 500px;
+}
+
+input[type="search"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: white;
+  border: none;
+  padding-left: 0.5em;
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
+  height: 2.5rem;
+  width: 100%;
+}
+
+input[type="search"]:focus {
+  outline: none;
+}
+
+::placeholder {
+  opacity: 0.5;
+}
+
+::-webkit-search-decoration,
+::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.search-info {
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 1.8rem;
+}
+
+.gallery {
+  width: 100%;
+}
+
+.thumb {
+  width: 300px;
+  position: relative;
+}
+
+.thumb img {
+  max-width: 300px;
+  max-height: 300px;
+  transition: all 0.5s;
+}
+
+
+
+/*****************************************************************************
+  Framing
+ *****************************************************************************/
+
+.framing-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.framing-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+  max-height: 500px;
+  min-width: 250px;
+  flex: 1 1 250px;
+  margin: 2rem 4rem;
+}
+
+.framing-preview img {
+  border: 0px solid black; /* necessary for Chrome & Firefox */
+}
+
+.framing-preview .museum-label {
+  margin-top: 1rem;
+}
+
+.framing-form {
+  width: 400px;
+  padding: 0;
+}
+
+.framing-form fieldset {
+  border: none;
+  min-width: auto;
+  border-bottom: 1px solid #f3f6f5;
+  padding: 15px 20px 15px 20px;
+  margin: 0;
+}
+
+.framing-form fieldset:last-of-type {
+  border-bottom: none;
+  display: flex;
+  flex-direction: column;
+}
+
+/* legend is necessary for accessibility, but we don't want to show it */
+.framing-form fieldset legend {
+  position: absolute;
+  clip: rect(0 0 0 0);
+}
+
+.framing-form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  line-height: 1.5em;
+}
+
+.framing-form button.buy {
+  margin-top: 0.5em;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .framing-main {
+    flex-direction: column;
+    margin: 0;
+  }
+  
+  .preview {
+    width: 90%;
+    flex: 0 0 auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .framing-form {
+    width: 100%;
+    box-shadow: none;
+    padding: 0;
+  }
+}
+
+/* Segmented Control *********************************************************/
+
+.segmented {
+  display: flex;
+  height: 3em;
+}
+
+.segmented input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+  border-style: none;
+}
+
+.segmented label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.segmented input:checked + label {
+  font-weight: bold;
+  opacity: 1;
+}
+
+/* Number Fields & Range Sliders *********************************************/
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  width: 2.5em;
+  height: 1em;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: right;
+  border: none;
+  padding: 3px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+/*
+Styling the range input element is very tricky.
+If you want to know more, see
+https://css-tricks.com/sliding-nightmare-understanding-range-input
+*/
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 0.5rem;
+  background: transparent;
+  background-color: #f3f6f5;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-style: none;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 1px 1px 3px;
+  margin-top: -2px;
+  color: rgb(144,144,144);
+}
+
+::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-style: none;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 1px 1px 3px;
+  color: rgb(144,144,144);
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+/* Frame Style Picker ********************************************************/
+
+.frame-style-row {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+  text-align: center;
+  margin-left: -20px;
+  margin-right: -20px;
+  overflow-x: hidden;
+}
+
+.frame-style-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100px;
+}
+
+.frame-style-item:first-of-type {
+  padding-left: 20px;
+}
+
+.frame-style-item:last-of-type {
+  padding-right: 20px;
+}
+
+.frame-style-item img {
+  height: 50px;
+  transform: rotate(45deg);
+  margin: 0px 20px 0px 20px;
+}
+
+.frame-style-item input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border-style: none;
+}
+
+.frame-style-item label {
+  cursor: pointer;
+  opacity: 0.4;
+  line-height: 2em;
+}
+
+.frame-style-item input:checked + label {
+  opacity: 1;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .frame-style-item {
+    height: 75px;
+  }
+  .frame-style-item img {
+    transform: rotate(45deg) scale(0.75);
+  }
+  .frame-style-item label {
+    line-height: 1em;
+  }
+}
+
+/* Mat Color Picker **********************************************************/
+
+.mat-color-row {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+  text-align: center;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+.mat-color-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 10px 0 10px;
+}
+
+.mat-color-item:first-of-type {
+  padding-left: 20px;
+}
+
+.mat-color-item:last-of-type {
+  padding-right: 20px;
+}
+
+.mat-color-item input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #eff2f5;
+  margin: 0 0 5px 0;
+  align-self: center;
+  opacity: 0.5;
+}
+
+.mat-color-item input:checked {
+  border: 2px solid #2b2e32;
+  opacity: 1;
+}
+
+.mat-color-item input:focus {
+  outline: none;
+}
+
+.mat-color-item label {
+  cursor: pointer;
+  opacity: 0.5;
+  padding-top: 0.25em;
+}
+
+.mat-color-item input:checked + label {
+  font-weight: bold;
+  opacity: 1;
+}
+
+
+#mat-color-mint {
+  background-color: #F5FFFA;
+}
+#mat-color-periwinkle {
+  background-color: #CCCCFF;
+}
+#mat-color-cerulean {
+  background-color: #407899;
+}
+#mat-color-burgundy {
+  background-color: #800020;
+}
+#mat-color-coal {
+  background-color: #495D6A;
+}
+
+
+/*****************************************************************************
+  Cart
+ *****************************************************************************/
+
+
+.cart-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cart-preview img {
+  border: 0px solid black; /* necessary for Chrome & Firefox */
+}
+
+.cart-item .museum-label {
+  flex-grow: 1;
+  max-width: 500px;
+}
+
+.cart-item .museum-label .price {
+  font-weight: bold;
+  text-align: right;
+  margin-top: 1rem;
+}
+
+.cart-remove {
+  border-radius: 50%;
+}
+
+.cart-remove::before {
+  content: "✕";
+  font-family: sans-serif;
+}
+
+.cart-total {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem;
+}
+
+.cart-checkout {
+  align-self: flex-end;
+  margin: 1rem;
+}
+
+@media (max-width: 600px) {
+  .cart-item {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .cart-preview {
+    justify-content: flex-end;
+  }
+
+  .cart-total {
+    align-self: stretch;
+    text-align: center;
+  }
+
+  .cart-checkout {
+    align-self: stretch;
+  }
+}
+
+
+/*****************************************************************************
+  Checkout
+ *****************************************************************************/
+
+.checkout-form > div {
+  margin: 1rem 0;
+  text-align: right;
+}
+
+/* this is a workaround for a Chrome bug that disallows display:grid on fieldset elements */
+.checkout-form div.grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  grid-gap: 0.5em 1em;
+  align-items: center;
+}
+
+.checkout-form fieldset {
+  border: none;
+  margin: 2rem 0;
+  padding: 0;
+}
+
+.checkout-form fieldset legend {
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-bottom: 0.5rem;
+}
+
+.checkout-form input {
+  -moz-appearance: textfield;
+  font-family: inherit;
+  font-size: 1em;
+  height: 1.25rem;
+  line-height: 1.25rem;
+  padding: 3px;
+  text-indent: 1.25px;
+}
+
+.checkout-total {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.checkout-form .button-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .checkout-form {
+    width: 100%;
+  }
+  .checkout-form label {
+    margin-bottom: -0.25em;
+    margin-top: 0.25em;
+  }
+  .checkout-form input {
+    margin: 0;
+  }
+  .checkout-form select {
+    width: 100%;
+  }
+  .checkout-form div.grid {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-form .button-row {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+
+  .checkout-form .button-row button {
+    width: 100%;
+    margin-bottom: 1em;
+  }
+}
+
+/* Dropdowns *****************************************************************/
+
+select {
+	display: block;
+	font-family: inherit;
+  font-size: 1em;
+  line-height: 1.25rem;
+  height: 1.75rem;
+  padding: 3px;
+  text-indent: 1.25px;  
+	box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+	-moz-appearance: none;
+	-webkit-appearance: none;
+  appearance: none;
+  background: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Ctitle%3Edown-arrow%3C%2Ftitle%3E%3Cg%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M10.293%2C3.293%2C6%2C7.586%2C1.707%2C3.293A1%2C1%2C0%2C0%2C0%2C.293%2C4.707l5%2C5a1%2C1%2C0%2C0%2C0%2C1.414%2C0l5-5a1%2C1%2C0%2C1%2C0-1.414-1.414Z%22%20fill%3D%22%23000000%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E") no-repeat;
+  background-position: right .7em top 50%, 0 0;
+  background-color: white;
+  border-radius: 0;
+}
+
+select::-ms-expand {
+	display: none;
+}

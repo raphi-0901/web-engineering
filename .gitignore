@@ -1,0 +1,7 @@
+.vscode/
+.DS_Store
+Thumbs.db
+node_modules/
+python_env/
+test/screenshots/actual/
+test/report/

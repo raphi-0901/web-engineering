@@ -1,0 +1,129 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Artmart</title>
+  <style>
+    .preview-container > div.sample-wrapper {
+      width: 100%;
+    }
+
+    .sample-wrapper > img.sample-frame {
+      box-sizing: border-box;
+      border-image-source: url(frame-styles/classic.jpg);
+      border-image-slice: 115;
+      border-width: 14px;
+      background-color: #407899;
+      padding: 22px;
+      width: 100%;
+      height: auto;
+      max-height: 364px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="search.html">
+      <img src="artmart_logo.png" alt="Artmart" class="logo">
+    </a>
+    <nav>
+    </nav>
+  </header>
+
+  <main class="framing-main">
+
+    <div id="preview-container" class="framing-preview">
+      <div class="sample-wrapper">
+        <img id="preview-image" src="met-objects/DP141042.jpg" alt="" class="sample-frame">
+      </div>
+        Katsushika Hokusai
+        Under the Wave off Kanagawa (Kanagawa oki nami ura), or The Great Wave, from the series
+          Thirty-six Views of Mount Fuji (Fugaku sanjūrokkei),
+        ca. 1830–32
+    </div>
+
+    <form id="framing-form" class="framing-form museum-label" action="cart.html">
+
+      <fieldset>
+        <legend>Print Size</legend>
+        <div class="segmented">
+          <input type="radio" name="print-size" id="print-size-s" value="S">
+          <label for="print-size-s" id="print-size-s-label">Small<br>29.7 × 20.2 cm</label>
+          <input type="radio" name="print-size" id="print-size-m" value="M">
+          <label for="print-size-m" id="print-size-m-label">Medium<br>42 × 28.7 cm</label>
+          <input type="radio" name="print-size" id="print-size-l" value="L" checked>
+          <label for="print-size-l" id="print-size-l-label">Large<br>59.4 × 40.5 cm</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Frame Style</legend>
+        <div class="frame-style-row">
+          <div class="frame-style-item">
+            <input type="radio" id="frame-style-classic" name="frameStyle" value="classic" checked>
+            <label for="frame-style-classic"><img src="frame-styles/classic-thumb.png" alt="Classic">Classic</label>
+          </div>
+          <div class="frame-style-item">
+            <input type="radio" id="frame-style-natural" name="frameStyle" value="natural">
+            <label for="frame-style-natural"><img src="frame-styles/natural-thumb.png" alt="Natural">Natural</label>
+          </div>
+          <div class="frame-style-item">
+            <input type="radio" id="frame-style-antique" name="frameStyle" value="shabby">
+            <label for="frame-style-antique"><img src="frame-styles/shabby-thumb.png" alt="Shabby">Shabby</label>
+          </div>
+          <div class="frame-style-item">
+            <input type="radio" id="frame-style-elegant" name="frameStyle" value="elegant">
+            <label for="frame-style-elegant"><img src="frame-styles/elegant-thumb.png" alt="Elegant">Elegant</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Mat Color</legend>
+        <div class="mat-color-row">
+          <div class="mat-color-item">
+            <input type="radio" id="mat-color-mint" name="matColor" value="mint">
+            <label for="mat-color-mint">Mint</label>
+          </div>
+          <div class="mat-color-item">
+            <input type="radio" id="mat-color-periwinkle" name="matColor" value="periwinkle">
+            <label for="mat-color-periwinkle">Periwinkle</label>
+          </div>
+          <div class="mat-color-item">
+            <input type="radio" id="mat-color-cerulean" name="matColor" value="cerulean" checked>
+            <label for="mat-color-cerulean">Cerulean</label>
+          </div>
+          <div class="mat-color-item">
+            <input type="radio" id="mat-color-burgundy" name="matColor" value="burgundy">
+            <label for="mat-color-burgundy">Burgundy</label>
+          </div>
+          <div class="mat-color-item">
+            <input type="radio" id="mat-color-coal" name="matColor" value="coal">
+            <label for="mat-color-coal">Coal</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Price</legend>
+        <div class="framing-form-row">
+          <label for="price">Price (excl. shipping)</label>
+          <div>
+            <span id="price" class="price">€ 180.25</span>
+          </div>
+        </div>
+        <div class="framing-form-row">
+          <label for="total-size">Total Size (incl. frame and mat)</label>
+          <div id="total-size">69.4 × 50.5 cm</div>
+        </div>
+        <button type="submit" class="buy">Add to Cart</button>
+      </fieldset>
+    </form>
+  </main>
+</body>
+
+</html>

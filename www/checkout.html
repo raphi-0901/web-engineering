@@ -1,0 +1,87 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Checkout | Artmart</title>
+</head>
+
+<body>
+  <header>
+    <a href="search.html">
+      <img src="artmart_logo.png" alt="Artmart" class="logo">
+    </a>
+  </header>
+
+  <main>
+    <form id="checkout-form" class="checkout-form">
+      <fieldset>
+        <legend>Contact information</legend>
+        <div class="grid">
+          <label>Email</label>
+          <input type="email" name="email" id="email" required>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Shipping address</legend>
+        <div class="grid">
+          <label>Name</label>
+          <input type="text" name="name" id="name" required>
+
+          <label>Address</label>
+          <input type="text" name="address" id="address" required>
+
+          <label>City</label>
+          <input type="text" name="city" id="city" required>
+
+          <label>Country</label>
+          <select name="country" id="country">
+            <option value="AT">Austria</option>
+            <option value="DE">Germany</option>
+            <option value="CH">Switzerland</option>
+          </select>
+
+          <label>Postal code</label>
+          <input type="text" name="postalcode" id="postalcode" required>
+
+          <label>Phone (optional)</label>
+          <input type="tel" name="phone" id="phone">
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Card details</legend>
+        <div class="grid">
+          <label>Name on card</label>
+          <input type="text" name="cardholder" id="cardholder" required>
+
+          <label>Card number</label>
+          <input type="text" name="cardnumber" id="cardnumber" required>
+
+          <label>Expiration date</label>
+          <input name="cardexpiry" id="cardexpiry" type="text" required>
+
+          <label>CVC</label>
+          <input name="cardcvc" id="cardcvc" type="text" pattern="\d{3}" required>
+        </div>
+      </fieldset>
+
+      <div>
+        <div>Subtotal: € 201.70</div>
+        <div>Shipping Costs: Free</div>
+      </div>
+
+      <div>
+        <div class="checkout-total">Total: € 201.70</div>
+      </div>
+
+      <div class="button-row">
+        <a href="cart.html">&larr; Back to Cart</a>
+        <button type="submit">Pay</button>
+      </div>
+    </form>
+  </main>
+</body>
+
+</html>

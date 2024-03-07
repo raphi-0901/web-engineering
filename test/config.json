@@ -1,0 +1,162 @@
+[
+  {
+    "filePath": "../www/search.html",
+    "tests": [
+      {
+        "testId": 101,
+        "type": "validate"
+      },
+      {
+        "testId": 102,
+        "type": "visual",
+        "resolution": {
+          "width": 1480,
+          "fullPage": true
+        },
+        "parameters": {
+          "pixelDiffThreshold": 5,
+          "minZncc": 0.9,
+          "maxDistance": 9
+        }
+      },
+      {
+        "testId": 103,
+        "type": "visual",
+        "resolution": {
+          "width": 1820,
+          "fullPage": true,
+          "maxDistance": 9
+        },
+        "parameters": {
+          "pixelDiffThreshold": 5,
+          "minZncc": 0.9,
+          "maxDistance": 9
+        }
+      },
+      {
+        "testId": 104,
+        "type": "visual",
+        "resolution": {
+          "width": 1440,
+          "fullPage": true
+        },
+        "parameters": {
+          "pixelDiffThreshold": 5,
+          "minZncc": 0.9,
+          "maxDistance": 9
+        }
+      },
+      {
+        "testId": 105,
+        "type": "visual",
+        "resolution": {
+          "width": 414,
+          "height": 1360
+        },
+        "parameters": {
+          "mergeDeltaY": 8,
+          "pixelDiffThreshold": 5,
+          "minZncc": 0.9,
+          "maxDistance": 9
+        }
+      }
+    ]
+  },
+  {
+    "filePath": "../www/framing.html",
+    "tests": [
+      {
+        "testId": 201,
+        "type": "validate"
+      },
+      {
+        "testId": 202,
+        "type": "visual",
+        "resolution": {
+          "width": 1440,
+          "fullPage": true
+        },
+        "parameters": {
+          "maxDistance": 9
+        }
+      },
+      {
+        "testId": 203,
+        "type": "visual",
+        "resolution": {
+          "width": 800,
+          "fullPage": true
+        },
+        "parameters": {
+          "maxDistance": 9
+        }
+      }
+    ]
+  },
+  {
+    "filePath": "../www/cart.html",
+    "tests": [
+      {
+        "testId": 301,
+        "type": "validate"
+      },
+      {
+        "testId": 302,
+        "type": "visual",
+        "resolution": {
+          "width": 1440,
+          "fullPage": true
+        },
+        "parameters": {
+          "maxDistance": 9,
+          "maxPixelDiff": 0.12
+        }
+      },
+      {
+        "testId": 303,
+        "type": "visual",
+        "resolution": {
+          "width": 770,
+          "fullPage": true
+        },
+        "parameters": {
+          "maxDistance": 9,
+          "maxPixelDiff": 0.12
+        }
+      },
+      {
+        "testId": 304,
+        "type": "visual",
+        "resolution": {
+          "width": 414,
+          "fullPage": true
+        },
+        "parameters": {
+          "maxDistance": 9,
+          "maxPixelDiff": 0.12
+        }
+      }
+    ]
+  },
+  {
+    "filePath": "../www/checkout.html",
+    "tests": [
+      {
+        "testId": 401,
+        "type": "validate"
+      },
+      {
+        "testId": 403,
+        "type": "visual",
+        "resolution": {
+          "width": 800,
+          "fullPage": true
+        },
+        "parameters": {
+          "mergeDeltaY": 25,
+          "maxDistance": 9
+        }
+      }
+    ]
+  }
+]

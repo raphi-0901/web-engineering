@@ -1,0 +1,308 @@
+<!--
+  Copyright (c) 2021 TU Wien - All Rights Reserved.
+  Unauthorized copying of this file is strictly prohibited.
+   
+  Contributors:
+    Michael Schröder <michael.schroeder@tuwien.ac.at>
+    Jürgen Cito <juergen.cito@tuwien.ac.at> 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}} Test Report</title>
+  <style>
+    body {
+      font-family: system-ui;
+      margin: 4rem;
+    }
+
+    table {
+      width: 100%;
+      border-spacing: 0;
+      border-collapse: collapse;
+      border: 1px solid black;
+    }
+
+    td {
+      border-top: 1px solid black;
+      padding: 0.5em 0;
+    }
+
+    .passed {
+      background-color: lightgreen;
+    }
+
+    .passed>td:first-child::before {
+      content: '✓';
+      padding: 0.5em;
+    }
+
+    .failed {
+      background-color: lightcoral;
+    }
+
+    .failed>td:first-child::before {
+      content: '✘';
+      padding: 0.5em;
+    }
+
+    .pending {
+      background-color: gainsboro;
+    }
+
+    .pending>td:first-child::before {
+      content: '?';
+      padding: 0.5em;
+    }
+
+    .error>td {
+      padding: 1em;
+      white-space: pre-wrap;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    }
+
+    .screenshots>td {
+      padding: 1em;
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .screenshots>td>div {
+      display: flex;
+    }
+
+    figure {
+      white-space: initial;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0.5em;
+    }
+
+    figcaption {
+      font-size: small;
+      margin-bottom: 0.5em;
+    }
+
+    canvas {
+      border: 1px solid black;
+      width: 100%;
+      display: block;
+    }
+
+    .mark-matching {
+      background-color: rgba(0, 255, 0, 0.25);
+    }
+
+    .mark-moved {
+      background-color: rgba(255, 255, 0, 0.25);
+    }
+
+    .mark-missing {
+      background-color: rgba(0, 0, 255, 0.25);
+    }
+
+    .mark-extra {
+      background-color: rgba(255, 0, 0, 0.25);
+    }
+
+    .mark-expected,
+    .mark-actual {
+      border: 1px solid rgba(255, 0, 255, 1);
+    }
+
+    form.toolbar {
+      font-size: small;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-items: flex-start;
+      margin-top: 0.5em;
+    }
+
+    form.toolbar label {
+      margin-right: 1em;
+      margin-top: 0.5em;
+    }
+
+    label[data-num="0"] {
+      display: none;
+    }
+
+    .points {
+      text-align: right;
+      padding-right: 1em;
+      font-weight: bold;
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+  <script>
+    function renderImage(canvas, callback) {
+      const img = new Image();
+      img.onload = () => {
+        canvas.dataset.imgWidth = img.width;
+        canvas.dataset.imgHeight = img.height;
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        callback(ctx);
+      };
+      img.src = canvas.dataset.imgSrc;
+    }
+
+    function renderActual(canvas, diff, opts) {
+      renderImage(canvas, (ctx) => {
+        if (opts.showMoved || opts.showMatching) {
+          for (match of diff.matches) {
+            const b = diff.regions.b[match.b];
+            if (match.moved && opts.showMoved) {
+              ctx.fillStyle = "rgba(255,255,0,0.25)";
+              ctx.fillRect(b.x, b.y, b.w, b.h);
+            } else if (!match.moved && opts.showMatching) {
+              ctx.fillStyle = "rgba(0,255,0,0.25)";
+              ctx.fillRect(b.x, b.y, b.w, b.h);
+            }
+          }
+        }
+        if (opts.showExtra) {
+          for (i of diff.leftovers.b) {
+            const b = diff.regions.b[i]
+            ctx.fillStyle = "rgba(255,0,0,0.25)";
+            ctx.fillRect(b.x, b.y, b.w, b.h);
+          }
+        }
+        if (opts.showExpected) {
+          for (a of diff.regions.a) {
+            ctx.strokeStyle = "rgba(255,0,255,1)";
+            ctx.strokeRect(a.x, a.y, a.w, a.h);
+          }
+        }
+      });
+    }
+
+    function renderExpected(canvas, diff, opts) {
+      renderImage(canvas, (ctx) => {
+        if (opts.showMoved || opts.showMatching) {
+          for (match of diff.matches) {
+            const a = diff.regions.a[match.a];
+            if (match.moved && opts.showMoved) {
+              ctx.fillStyle = "rgba(255,255,0,0.25)";
+              ctx.fillRect(a.x, a.y, a.w, a.h);
+            } else if (!match.moved && opts.showMatching) {
+              ctx.fillStyle = "rgba(0,255,0,0.25)";
+              ctx.fillRect(a.x, a.y, a.w, a.h);
+            }
+          }
+        }
+
+        if (opts.showMissing) {
+          for (i of diff.leftovers.a) {
+            const a = diff.regions.a[i];
+            ctx.fillStyle = "rgba(0,0,255,0.25)";
+            ctx.fillRect(a.x, a.y, a.w, a.h);
+          }
+        }
+
+        if (opts.showActual) {
+          for (b of diff.regions.b) {
+            ctx.strokeStyle = "rgba(255,0,255,1)";
+            ctx.strokeRect(b.x, b.y, b.w, b.h);
+          }
+        }
+      });
+    }
+
+    function getOpts(form) {
+      let opts = {}
+      for (elem of form.elements) {
+        opts[elem.name] = elem.checked
+      }
+      return opts
+    }
+
+    function render(testId) {
+      const canvasA = document.querySelector(`canvas[data-side="a"][data-test-id="${testId}"]`)
+      const formA = document.querySelector(`form[data-side="a"][data-test-id="${testId}"]`);
+      const canvasB = document.querySelector(`canvas[data-side="b"][data-test-id="${testId}"]`)
+      const formB = document.querySelector(`form[data-side="b"][data-test-id="${testId}"]`);
+      const diff = diffs[testId];
+      renderExpected(canvasA, diff, getOpts(formA));
+      renderActual(canvasB, diff, getOpts(formB));
+    }
+
+    let diffs = [];
+  </script>
+</head>
+
+<body>
+  <h1>{{title}} Test Report<span style="float: right;">{{totalPoints}} points {{partyFace}}</span></h1>
+  {{startTime}}<br>
+  {{numTotalTests}} tests &mdash; {{numPassedTests}} passed / {{numFailedTests}} failed<br>
+  <br>
+  {{maxPoints}} points<br>
+  &minus;{{minusPoints}} points for failed tests<br>
+  = {{totalPoints}} points total<br>
+
+  {{#sections}}
+  <h2>{{testFileName}}</h2>
+  <table>
+    {{#tests}}
+    <tr class="{{status}}">
+      <td>{{testId}} &mdash; {{description}}</td>
+      <td class="points">{{#minusPoints}}&minus;{{.}}{{/minusPoints}}</td>
+    </tr>
+
+    {{#failureMessage}}
+    <tr class="error">
+      <td colspan=2>{{{.}}}</td>
+    </tr>
+    {{/failureMessage}}
+
+    {{#errors}}
+    <tr class="error">
+      <td colspan=2>{{.}}</td>
+    </tr>
+    {{/errors}}
+
+    {{#visualTestError}}
+    <tr class="screenshots">
+      <td colspan=2>
+        <div>
+          <figure>
+            <figcaption>Your Page</figcaption>
+            <canvas data-side="b" data-test-id="{{testId}}" data-img-src="{{{actual}}}"></canvas>
+            <form class="toolbar" data-side="b" data-test-id="{{testId}}" onchange="render(this.dataset.testId);">
+              <label class="mark-matching" data-num="{{numMatching}}"><input type="checkbox" name="showMatching">&nbsp;matching</label>
+              <label class="mark-moved" data-num="{{numMoved}}"><input type="checkbox" name="showMoved" checked>&nbsp;moved</label>
+              <label class="mark-extra" data-num="{{numExtra}}"><input type="checkbox" name="showExtra" checked>&nbsp;unexpected</label>
+              <label class="mark-expected"><input type="checkbox" name="showExpected">&nbsp;expected components</label>
+            </form>
+          </figure>
+          <figure>
+            <figcaption>Expected</figcaption>
+            <canvas data-side="a" data-test-id="{{testId}}" data-img-src="{{{expected}}}"></canvas>
+            <form class="toolbar" data-side="a" data-test-id="{{testId}}" onchange="render(this.dataset.testId);">
+              <label class="mark-matching" data-num="{{numMatching}}"><input type="checkbox" name="showMatching">&nbsp;matching</label>
+              <label class="mark-moved" data-num="{{numMoved}}"><input type="checkbox" name="showMoved" checked>&nbsp;moved</label>
+              <label class="mark-missing" data-num="{{numMissing}}"><input type="checkbox" name="showMissing" checked>&nbsp;missing</label>
+              <label class="mark-actual"><input type="checkbox" name="showActual">&nbsp;your components</label>
+            </form>
+          </figure>
+        </div>
+      </td>
+      <script>
+        diffs[{{testId}}] = {{{result}}};
+        render({{testId}});
+      </script>
+    </tr>
+    {{/visualTestError}}
+
+    {{/tests}}
+  </table>
+  {{/sections}}
+</body>
+
+</html>
