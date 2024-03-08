@@ -1,9 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="own.css">
   <style>
     #cart img.sample-frame-1 {
       box-sizing: border-box;
@@ -32,6 +34,8 @@
       <img src="artmart_logo.png" alt="Artmart" class="logo">
     </a>
     <nav>
+      <a href="search.html">Search</a>
+      <a href="cart.html">Cart (2)</a>
     </nav>
   </header>
 
@@ -46,12 +50,12 @@
           </a>
         </div>
         <div class="museum-label">
-          Ferdinand Hodler
-          The Dream of the Shepherd (Der Traum des Hirten),
-          1896
+          <span class="artist">Ferdinand Hodler</span>
+          <span class="title">The Dream of the Shepherd (Der Traum des Hirten)</span>,
+          <span class="date">1896</span>
           <br><br>
           Small print in a 5&nbsp;cm classic frame.
-          € 87.20
+          <p class="price">€ 87.20</p>
           <button type="button" class="cart-remove" aria-label="Remove"></button>
         </div>
       </div>
@@ -63,15 +67,24 @@
           </a>
         </div>
         <div class="museum-label">
-          Vincent van Gogh
-          Wheat Field with Cypresses,
-          1889
+          <span class="artist">Vincent van Gogh</span>
+          <span class="title">Wheat Field with Cypresses</span>,
+          <span class="date">1889</span>
           <br><br>
           Medium print in a 3.3&nbsp;cm natural frame with a 1.7&nbsp;cm mint mat.
-          € 114.50
+          <p class="price">€ 114.50</p>
+
           <button type="button" class="cart-remove" aria-label="Remove"></button>
         </div>
       </div>
+
+      <p class="total-price">
+        Total: € 201.70
+      </p>
+
+      <form action="checkout.html">
+        <button class="checkout-button" type="submit">Checkout</button>
+      </form>
     </section>
   </main>
 </body>

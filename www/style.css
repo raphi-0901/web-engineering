@@ -4,13 +4,15 @@
 
 :root {
   --serif-font: Palatino, "Palatino Linotype", "URW Palladio L", serif;
+  --clr-primary: #222c2e;
+  --clr-background: #edf2f1;
+  --clr-label: #ffffff;
 }
 
 body {
   font-family: var(--serif-font);
   font-size: 100%;
   line-height: 1.2rem;
-  height: 100%;
   margin: 0;
 }
 
@@ -119,17 +121,6 @@ input[type="search"]:focus {
   width: 100%;
 }
 
-.thumb {
-  width: 300px;
-  position: relative;
-}
-
-.thumb img {
-  max-width: 300px;
-  max-height: 300px;
-  transition: all 0.5s;
-}
-
 
 
 /*****************************************************************************
@@ -161,11 +152,6 @@ input[type="search"]:focus {
 
 .framing-preview .museum-label {
   margin-top: 1rem;
-}
-
-.framing-form {
-  width: 400px;
-  padding: 0;
 }
 
 .framing-form fieldset {
