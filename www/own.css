@@ -110,18 +110,14 @@ form[role='search'] {
     }
   }
 
-  .segmented {
-    margin: 1px 0;
-  }
-
   button.buy {
-    height: auto;
-    font-family: inherit;
-    padding-block: 13px;
     font-size: 1rem;
+    font-family: inherit;
   }
 
   .framing-slider {
+    padding-top: 2px;
+
     .slider-heading {
       display: flex;
       justify-content: space-between;
